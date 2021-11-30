@@ -144,5 +144,31 @@
 - 后端服务是保持开发与线上等价的重要部分
 - 应该反对在不同环境间使用不同的后端服务
 
-### 4. 
+### 4. 认识 Spring Cloud 的组成部分
+
+> Spring Cloud offers a simple and accessible programming model to the most common distributed system patterns, helping developers build resilient, reliable, and coordinated applications. -- Spring 官网
+
+![Spring Microservices Online Sale, UP TO 51% OFF](https://tva1.sinaimg.cn/large/008i3skNgy1gwx93qn070j30tc0e2gmi.jpg)
+
+
+
+#### 4.1 Spring Cloud 的主要功能
+
+- 服务发现
+- 服务网关
+- 服务熔断
+- 分布式消息
+- 配置服务
+- 分布式跟踪
+- 服务安全（Spring Security）
+- 各种云平台支持
+
+#### 4.2 Spring Cloud 的版本号规则
+
+- Spring Cloud 是一个大工程，其中包含多个独立项目
+- BOM -Release Train
+  - London Tube Stations
+  - 字母排序
+    - Greenwich，Finchley，Edgware
+  - SR - Service Release
 
