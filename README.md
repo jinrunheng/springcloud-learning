@@ -172,3 +172,149 @@
     - Greenwich，Finchley，Edgware
   - SR - Service Release
 
+## 服务注册与发现
+
+### 1. 使用 Eureka 作为服务注册中心
+
+#### 1.1 认识 Eureka 
+
+**什么是 Eureka**
+
+- Eureka 是在 AWS 上定位服务的 REST 服务
+
+**Netflix OSS**
+
+- https://netflix.github.io
+
+**Spring 对 Netflix 套件的支持**
+
+- Spring Cloud Netflix
+
+#### 1.2 在本地启动一个简单的 Eureka 服务
+
+**Starter**
+
+- spring-cloud-dependencies
+- spring-cloud-starter-netflix-eureka-starter
+
+**声明**
+
+- `@EnableEurekaServer`
+
+**注意事项**
+
+- 默认端口为 8761
+- Eureka 自己不要注册到 Eureka 了
+
+#### 1.3 将服务注册到 Eureka Server
+
+**Starter**
+
+- spring-cloud-starter-netflix-eureka-client
+
+**声明**
+
+- `@EnableDiscoveryClient`
+- `@EnableEurekaClient`
+
+**一些配置项**
+
+- eureka.client.service-url.default-zone
+- eureka.client.instance.prefer-ip-address
+
+#### 1.4 关于 Bootstrap 属性
+
+**Bootstrap 属性**
+
+- 启动引导阶段加载到属性
+- bootstrap.properties | .yml
+- spring.cloud.bootstrap.name = bootstrap
+
+**常用配置**
+
+- spring.application.name = 应用
+- 配置中心相关
+
+### 2. 使用 Spring Cloud Loadbalancer 访问服务
+
+#### 2.1 如何获得服务地址
+
+**EurekaClient**
+
+- `getNextServerFromEureka()`
+
+**DiscoveryClient**
+
+- `getInstances()`
+
+建议使用后者，因为 DiscoveryClient 是 Spring Cloud 提供的一个抽象，如果后面不再使用 Eureka 作为服务注册中心，也不会报错。
+
+#### 2.2 Load Balancer Client
+
+**RestTemplate 与 WebClient**
+
+- `@LoadBalaced`
+- 实际是通过 ClientHttpRequestInterceptor 实现的
+  - LoadBalancerInterceptor
+  - LoadBalancerClient
+    - RibbonLoadBalancerClient
+
+
+
+### 3. 使用 Feign 访问服务
+
+#### 3.1 认识 Feign
+
+**Feign**
+
+- 声明式 REST Web 服务客户端
+- https://github.com/OpenFeign/feign
+
+**Spring Cloud OpenFeign**
+
+- spring-cloud-starter-openfeign
+
+#### 3.2 Feign 的简单实用
+
+**开启 Feign 支持**
+
+- @EnableFeignClients
+
+**定义 Feign 接口**
+
+- @FeignClient
+
+**简单配置**
+
+- FeignClientsConfiguration
+- Encoder / Decoder / Logger / Contract / Client ...
+
+#### 3.3 通过配置定制 Feign
+
+```yml
+feign:
+	client:
+		config:
+			feignName:
+				connectTimeout: 5000
+				readTimeout: 5000
+				loggerLevel: full
+				errorDecoder: com.example.SimpleErrorDecoder
+				retryer: com.example.SimpleRetryer
+				requestInterceptors:
+					- com.example.FooRequestInterceptor
+					- com.example.BarRequestInterceptor
+				decode404: false
+        encoder: com.example.SimpleEncoder
+        decoder: com.example.SimpleDecoder
+        contract: com.example.SimpleContract
+```
+
+#### 3.4 Feign 的一些其他配置
+
+- feign.okhttp.enabled=true
+- feign.httpclient.enabled=true
+- feign.compression.response.enabled=true
+- feign.compression.request.enabled=true
+- feign.compression.request.mime-types=text/xml,application/json
+- feign.compression.request.min-request-size=2048

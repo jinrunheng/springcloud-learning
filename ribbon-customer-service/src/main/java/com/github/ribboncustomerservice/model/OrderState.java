@@ -1,4 +1,5 @@
 package com.github.ribboncustomerservice.model;
 
-public class OrderState {
+public enum OrderState {
+    INIT, PAID, BREWING, TAKEN, CANCELLED
 }
