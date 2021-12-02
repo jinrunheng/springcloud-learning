@@ -406,5 +406,58 @@ feign:
 - `docker run --name zookeeper -p 2181:2181 -d zookeeper:3.5`
 - `docker exec -it zookeeper bash`
 
+### 6. 使用 Consul 作为服务注册中心
 
+> "Consul is a distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure."  - https://github.com/hashicorp/consul
 
+#### 6.1 认识 HashiCorp Consul
+
+**Consul**
+
+- https://www.consul.io
+
+**关键特性**
+
+- 服务发现
+- 健康检查
+- KV 存储
+- 多数据中心支持
+- 安全的服务间通信
+
+#### 6.2 使用 Consul 提供服务发现能力
+
+**Consul 的能力**
+
+- Service registry,integrated health checks,and DNS and HTTP interfaces enable any service to discover and be discovered by other services
+
+**好用的功能**
+
+- HTTP API
+- DNS（xxx.service.consul）
+- 与 Nginx 联动，比如 ngx_http_consul_backend_module
+
+#### 6.3 使用 Consul 作为注册中心
+
+**Spring Cloud Consul**
+
+- spring-cloud-starter-consul-discovery
+
+**简单配置**
+
+- spring.cloud.consul.host=localhost
+- spring.cloud.consul.port=8500
+- spring.cloud.consul.discovery.prefer-ip-address=true
+
+#### 6.4 通过 Docker 启动 Consul
+
+**官方指引**
+
+- https://hub.docker.com/_/consul
+
+**获取镜像**
+
+- `docker pull consul`
+
+**运行 Consul 镜像**
+
+- `docker run --name consul -d -p 8500:8500 -p 8600:8600/udp consul `
