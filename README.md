@@ -346,5 +346,65 @@ feign:
 - EurekaAutoServiceRegistration
   - SmartLifecycle
 
+### 5. 使用 Zookeeper 作为服务注册中心
+
+#### 5.1 认识 Zookeeper
+
+**Zookeeper**
+
+- A Distributed Coordination Service for Distributed Applications
+- https://zookeeper.apache.org
+
+**设计目标**
+
+- 简单
+- 多副本
+- 有序
+- 快
+
+#### 5.2 使用 Zookeeper 作为注册中心
+
+**Spring Cloud Zookeeper**
+
+- spring-cloud-starter-zookeeper-discovery
+- Apache Curator
+
+**简单配置**
+
+- spring-cloud.zookeeper.connect-string=localhost:2181
+
+**提示**
+
+- 注意 Zookeeper 的版本
+- 3.5.x 还是 Beta，但很多人在生产中使用它
+
+#### 5.3 使用 Zookeeper 作为注册中心的问题
+
+**两篇文章值得阅读（面试题：为什么不使用 Zookeeper 作为注册中心，会带来哪些问题？）**
+
+- 《阿里巴巴为什么不用 Zookeeper 做服务发现》
+- 《Eureka! Why You Shouldn't Use ZooKeeper for Service Discovery》
+
+**核心思想**
+
+- 在实践中，注册中心不能因为自身的任何原因破坏服务之间本身的可联通性
+- 注册中心需要 AP，而 Zookeeper 是 CP
+  - CAP：一致性，可用性，分区容忍性
+
+**通过 Docker 启动 Zookeeper**
+
+**官方指引**
+
+- https://hub.docker.com/_/zookeeper
+
+**获取镜像**
+
+- `docker pull zookeeper:3.5`
+
+**运行 Zookeeper 镜像**
+
+- `docker run --name zookeeper -p 2181:2181 -d zookeeper:3.5`
+- `docker exec -it zookeeper bash`
+
 
 
