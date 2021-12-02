@@ -319,3 +319,32 @@ feign:
 - feign.compression.request.mime-types=text/xml,application/json
 - feign.compression.request.min-request-size=2048
 
+### 4.  深入理解服务发现背后的 DiscoveryClient
+
+#### 4.1 Spring Cloud Commons 提供的抽象
+
+**服务注册抽象**
+
+- 提供了 ServiceRegistry 抽象
+
+**客户发现抽象**
+
+- 提供了 DiscoveryClient 抽象
+  - `@EnableDiscoveryClient`
+- 提供了 LoadBalancerClient 抽象
+
+#### 4.2 自动向 Eureka 服务端注册
+
+**ServiceRegistry**
+
+- EurekaServiceRegistry
+- EurekaRegistration
+
+**自动配置**
+
+- EurekaClientAutoConfiguration
+- EurekaAutoServiceRegistration
+  - SmartLifecycle
+
+
+
