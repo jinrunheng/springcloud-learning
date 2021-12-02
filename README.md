@@ -318,3 +318,4 @@ feign:
 - feign.compression.request.enabled=true
 - feign.compression.request.mime-types=text/xml,application/json
 - feign.compression.request.min-request-size=2048
+
