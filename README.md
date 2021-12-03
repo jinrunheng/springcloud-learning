@@ -461,3 +461,58 @@ feign:
 **运行 Consul 镜像**
 
 - `docker run --name consul -d -p 8500:8500 -p 8600:8600/udp consul `
+
+### 7. 使用 Nacos 作为服务注册中心
+
+#### 7.1 认识 Nacos
+
+**Nacos**
+
+- 一个更易于构建云原生应用的动态服务发现，配置管理和服务管理平台
+- https://nacos.io/zh-cn/index.html
+
+**功能**
+
+- 动态服务配置
+- 服务发现和管理
+- 动态 DNS 服务
+
+#### 7.2 使用 Nacos 作为注册中心
+
+**Spring Cloud Alibaba**
+
+- spring-cloud-alibaba-dependencies
+- spring-cloud-starter-alibaba-nacos-discovery
+
+**简单配置**
+
+- spring.cloud.nacos-discovery.server-addr
+
+#### 7.3 本地启动 Nacos
+
+首先我们需要下载 Nacos
+
+地址：https://github.com/alibaba/nacos/releases
+
+然后进入到 nacos/bin 目录下，输入命令启动 Nacos 服务
+
+```bash
+sh startup.sh -m standalone
+```
+
+Nacos 默认使用 8848 端口，可以通过 **http://127.0.0.1:8848/nacos/index.html** 进入到自带的控制界面，默认的用户名和密码是 nacos/nacos
+
+#### 7.4 通过 Docker 启动 Nacos
+
+**官方指引**
+
+- https://hub.docker.com/r/nacos/nacos-server
+
+**获取镜像**
+
+- `docker pull nacos/nacos-server`
+
+**运行 Nacos 镜像**
+
+- `docker run --name nacos -d -p 8848:8848 -e MODE=standalone nacos/nacos-server`
+- 用户名密码为 nacos
