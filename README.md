@@ -516,3 +516,36 @@ Nacos 默认使用 8848 端口，可以通过 **http://127.0.0.1:8848/nacos/inde
 
 - `docker run --name nacos -d -p 8848:8848 -e MODE=standalone nacos/nacos-server`
 - 用户名密码为 nacos
+
+### 8. 如何定制自己的 DiscoveryClient
+
+#### 8.1 已经接触过的 Spring Cloud 类
+
+**DiscoveryClient**
+
+- EurekaDiscoveryClient
+- ZookeeperDiscoveryClient
+- ConsulDiscoveryClient
+- NacosDiscoveryClient
+
+**LoadBalancerClient**
+
+- RibbonLoadBalancerClient
+
+#### 8.2 实现自己的 DiscoveryClient
+
+**需要做的：**
+
+- 返回该 DiscoveryClient 能提供的服务名列表
+- 返回指定服务对应的 ServiceInstance 列表
+- 返回 DiscoveryClient 的顺序
+- 返回 HealthIndicator 里显示的描述
+
+#### 8.3 实现自己的 RibbonClient 支持
+
+**需要做的：**
+
+- 实现自己的 `ServerList<T extends Server>`
+  - Ribbon 提供了 `AbstractServerList<T extends Server>`
+- 提供一个配置类，声明 ServerList Bean 实例
+
