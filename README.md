@@ -1,4 +1,4 @@
-# Spring Cloud Learning
+# dSpring Cloud Learning
 
 ## Spring Cloud 及 Cloud Native 概述
 
@@ -622,7 +622,30 @@ docker run --name consul -d -p 8500:8500 -p 8600:8600/udp consul
 - `@FeignClient`
   - fallback / fallbackFactory
 
+### 2. 如何观察服务熔断
 
+#### 2.1 如何了解熔断的情况
+
+**打日志**
+
+- 在发生熔断时打印特定该日志
+
+**看监控**
+
+- 主动向监控系统埋点，上报熔断情况
+- 提供与熔断相关的 Endpoint，让第三方系统来拉取信息
+
+#### 2.2 Hystrix Dashboard
+
+**Spring Cloud 为我们提供了**
+
+- Hystrix Metrics Stream
+  - spring-boot-starter-actuator
+    - /actuator/hystrix.stream
+- Hystrix Dashboard
+  - spring-cloud-starter-netflix-hystrix-dashboard
+    - `@EnableHystrixDashboard`
+    - /hystrix
 
 
 
