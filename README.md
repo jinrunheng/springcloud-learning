@@ -573,7 +573,20 @@ Nacos 默认使用 8848 端口，可以通过 **http://127.0.0.1:8848/nacos/inde
 
 #### 1.2 使用 AOP 实现服务熔断
 
-案例详见：[circuit-break-demo]()
+案例详见：[circuit-break-demo](https://github.com/jinrunheng/springcloud-learning/tree/main/circuit-break-demo)
 
 我们实现的功能是，使用一个 counter 计数器来对请求失败的次数进行计数，如果失败的次数超过阈值，就返回空；与此同时，breakCounter 计数器用来对断路保护的次数进行计数，当达到一个阈值后，就跳出来看一下服务是否可用，如果可用则将 counter 和 breakCounter 全部都重新置 0，如果不可用则将 breakCounter 置 0，继续进行断路保护。
 
+首先，在本地启动一个 consul，运行命令：
+
+```bash
+docker run --name consul -d -p 8500:8500 -p 8600:8600/udp consul
+```
+
+此时，我们并没有启动 waiter-service 服务。
+
+使用 Postman 发起请求：POST:http://localhost:8090/customer/order
+
+如果发送请求达到一定的次数时，就会进入断路保护。我们模拟了 waiter-service 服务挂掉后，如何进行断路保护的一个场景。
+
+开启了 waiter-service 后，服务便可以正常调用。
