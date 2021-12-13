@@ -590,3 +590,39 @@ docker run --name consul -d -p 8500:8500 -p 8600:8600/udp consul
 如果发送请求达到一定的次数时，就会进入断路保护。我们模拟了 waiter-service 服务挂掉后，如何进行断路保护的一个场景。
 
 开启了 waiter-service 后，服务便可以正常调用。
+
+#### 1.3 Netflix Hystrix
+
+
+
+![netflix hystrix](https://tva1.sinaimg.cn/large/008i3skNgy1gxc13l4ru1j31ca0si40g.jpg)
+
+如图可见，当我们的 Serivce B 服务不可用时，Netflix Hystrix 就会调用 Fallback 的降级方法。
+
+- 实现了断路器模式
+
+- `@HystrixCommand`
+
+  - fallbackMethod / commandProperties
+
+    - `@HystrixProperty(name="execution.isolation.strategy", value="SEMAPHORE")`
+
+  - https://github.com/Netflix/Hystrix/wiki/Configuration
+
+    
+
+**Spring Cloud 支持**
+
+- spring-cloud-starter-netflix-hystrix
+- `@EnableCircuitBreaker`
+
+**Feign 支持**
+
+- feign.hystrix.enabled=true
+- `@FeignClient`
+  - fallback / fallbackFactory
+
+
+
+
+
