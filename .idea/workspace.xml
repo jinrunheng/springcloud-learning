@@ -20,17 +20,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d812c7e3-97ae-402c-9e86-3a93ac2c5e9f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/circuit-break-demo/src/main/java/com/github/circuitbreakdemo/controller/CustomerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/circuit-break-demo/src/main/java/com/github/circuitbreakdemo/integration/CoffeeOrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/circuit-break-demo/src/main/java/com/github/circuitbreakdemo/integration/CoffeeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/circuit-break-demo/src/main/java/com/github/circuitbreakdemo/model/Coffee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/circuit-break-demo/src/main/java/com/github/circuitbreakdemo/model/CoffeeOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/circuit-break-demo/src/main/java/com/github/circuitbreakdemo/model/NewOrderRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/circuit-break-demo/src/main/java/com/github/circuitbreakdemo/model/OrderState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/circuit-break-demo/src/main/java/com/github/circuitbreakdemo/support/CircuitBreakerAspect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/circuit-break-demo/src/main/java/com/github/circuitbreakdemo/support/CustomConnectionKeepAliveStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/circuit-break-demo/src/main/java/com/github/circuitbreakdemo/support/MoneyDeserializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/circuit-break-demo/src/main/java/com/github/circuitbreakdemo/support/MoneySerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/circuit-break-demo/src/main/resources/bootstrap.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/springcloudlearning/SpringcloudLearningApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/springcloudlearning/SpringcloudLearningApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/consul-waiter-service/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/consul-waiter-service/src/main/resources/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/feign-customer-service/src/main/java/com/github/feigncustomerservice/support/CustomConnectionKeepAliveStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/feign-customer-service/src/main/java/com/github/feigncustomerservice/support/CustomConnectionKeepAliveStrategy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +75,9 @@
       <option name="presentableId" value="Default" />
       <updated>1638262526618</updated>
       <workItem from="1638262529065" duration="142000" />
+      <workItem from="1638603437069" duration="90000" />
+      <workItem from="1638854303785" duration="12000" />
+      <workItem from="1639362666445" duration="39000" />
     </task>
     <servers />
   </component>
@@ -86,5 +94,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

@@ -1,5 +1,4 @@
-package com.github.feigncustomerservice.support;
-
+package com.github.circuitbreakdemo.support;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -11,7 +10,6 @@ import org.apache.http.protocol.HttpContext;
 import java.util.Arrays;
 
 public class CustomConnectionKeepAliveStrategy implements ConnectionKeepAliveStrategy {
-
     private final long DEFAULT_SECONDS = 30;
 
     @Override

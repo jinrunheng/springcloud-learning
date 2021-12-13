@@ -253,7 +253,7 @@
 
 **RestTemplate 与 WebClient**
 
-- `@LoadBalaced`
+- `@LoadBalanced`
 - 实际是通过 ClientHttpRequestInterceptor 实现的
   - LoadBalancerInterceptor
   - LoadBalancerClient
@@ -548,4 +548,32 @@ Nacos 默认使用 8848 端口，可以通过 **http://127.0.0.1:8848/nacos/inde
 - 实现自己的 `ServerList<T extends Server>`
   - Ribbon 提供了 `AbstractServerList<T extends Server>`
 - 提供一个配置类，声明 ServerList Bean 实例
+
+## 服务熔断
+
+### 1. 使用 Hystrix 实现服务熔断
+
+#### 1.1 断路器模式
+
+**断路器**
+
+- Circuit Breaker pattern - Release It,Michael Nygard
+
+- CircuitBreaker,Martin Fowler
+
+  - https:martinfowler.com/bliki/CircuitBreaker.html
+
+    ![img](https://tva1.sinaimg.cn/large/008i3skNgy1gx0mi23ka0j30fi0oidhq.jpg)
+
+**核心思想**
+
+- 在断路器对象中封装受保护的方法调用
+- 该对象监控调用和断路情况
+- 调用失败触发阈值后，后续调用直接由断路器返回错误，不再执行实际调用
+
+#### 1.2 使用 AOP 实现服务熔断
+
+案例详见：[circuit-break-demo]()
+
+我们实现的功能是，使用一个 counter 计数器来对请求失败的次数进行计数，如果失败的次数超过阈值，就返回空；与此同时，breakCounter 计数器用来对断路保护的次数进行计数，当达到一个阈值后，就跳出来看一下服务是否可用，如果可用则将 counter 和 breakCounter 全部都重新置 0，如果不可用则将 breakCounter 置 0，继续进行断路保护。
 
