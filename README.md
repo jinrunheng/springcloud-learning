@@ -641,11 +641,20 @@ docker run --name consul -d -p 8500:8500 -p 8600:8600/udp consul
 
 - Hystrix Metrics Stream
   - spring-boot-starter-actuator
-    - /actuator/hystrix.stream
+    - `/actuator/hystrix.stream`
 - Hystrix Dashboard
   - spring-cloud-starter-netflix-hystrix-dashboard
     - `@EnableHystrixDashboard`
-    - /hystrix
+    - `/hystrix`
+
+#### 2.3 聚合集群熔断信息
+
+**Spring Cloud 为我们提供了**
+
+- Netflix Turbine
+- spring-cloud-starter-netflix-turbines
+  - `@EnableTurbine`
+  - `/tubine.stream?cluster = 集群名`
 
 
 
