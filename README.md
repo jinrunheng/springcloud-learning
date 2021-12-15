@@ -712,3 +712,24 @@ docker run --name consul -d -p 8500:8500 -p 8600:8600/udp consul
 
     - wait-duration-in-open-state
 
+### 4. 使用 Resilience4j 实现服务限流
+
+#### 4.1 Bulkhead
+
+**目的**
+
+- 防止下游依赖被并发请求冲击
+- 防止发生连环故障
+
+**用法**
+
+- BulkheadRegistry / BulkheadConfig
+- `@Bulkhead(name = "名称")`
+
+**配置**
+
+- BulkheadProperties
+  - resilience4j.bulkhead.backends.名称
+  - max-concurrent-call
+  - max-wait-time
+
