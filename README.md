@@ -1,4 +1,4 @@
-# dSpring Cloud Learning
+# Spring Cloud Learning
 
 ## Spring Cloud 及 Cloud Native 概述
 
@@ -656,5 +656,59 @@ docker run --name consul -d -p 8500:8500 -p 8600:8600/udp consul
   - `@EnableTurbine`
   - `/tubine.stream?cluster = 集群名`
 
+### 3. 使用 Resilience4j 实现服务熔断
 
+####  3.1 Hystrix 以外的选择
+
+**Hystrix**
+
+- Netflix 停止维护，给了官方推荐
+
+**Resilience4j**
+
+- https://github.com/resilience4j/resilience4j
+
+- 一款受 Hystrix 启发的轻量级且易于使用的容错库
+- 针对 Java 8 与函数式编程设计
+
+#### 3.2 核心组件
+
+| 组件名称                    | 功能                |
+| --------------------------- | ------------------- |
+| resilience4j-circuitbreaker | Circuit breaking    |
+| resilience4j-ratelimiter    | 频率控制            |
+| resilience4j-bulkhead       | 依赖隔离 & 负载保护 |
+| resilience4j-retry          | 自动重试            |
+| resilience4j-cache          | 应答缓存            |
+| resilience4j-timelimiter    | 超时控制            |
+
+#### 3.3 断路器
+
+**实现**
+
+- 基于 ConcurrentHashMap 的内存断路器
+- CircuitBreakerRegistry
+- CircuitBreakerConfig
+
+**依赖**
+
+- resilience4j-spring-boot2
+  - resilience4j-circuitbreaker
+  - resilience4j-micrometer
+
+  - ... ...
+
+**注解方式**
+
+- `@CircuitBreaker(name = "名称")`
+
+**配置**
+
+- CircuitBreakerProperties
+
+  - resilience4j.circuitbreaker.backends.名称
+
+    - failure-rate-threshold
+
+    - wait-duration-in-open-state
 
