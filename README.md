@@ -733,3 +733,125 @@ docker run --name consul -d -p 8500:8500 -p 8600:8600/udp consul
   - max-concurrent-call
   - max-wait-time
 
+**模拟并发访问，查看服务限流情况**
+
+使用命令：
+
+```bash
+ab -c 5 -n 10  http://localhost:8090/customer/menu
+```
+
+模拟并发数量为 5 ，访问 10 次：
+
+```tex
+➜  ~ ab -c 5 -n 10  http://localhost:8090/customer/menu
+This is ApacheBench, Version 2.3 <$Revision: 1843412 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:
+Server Hostname:        localhost
+Server Port:            8090
+
+Document Path:          /customer/menu
+Document Length:        642 bytes
+
+Concurrency Level:      5
+Time taken for tests:   0.045 seconds
+Complete requests:      10
+Failed requests:        0
+Total transferred:      7610 bytes
+HTML transferred:       6420 bytes
+Requests per second:    220.76 [#/sec] (mean)
+Time per request:       22.649 [ms] (mean)
+Time per request:       4.530 [ms] (mean, across all concurrent requests)
+Transfer rate:          164.06 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    10   14   3.3     16      19
+Waiting:        9   13   3.4     15      19
+Total:         10   14   3.3     16      19
+
+Percentage of the requests served within a certain time (ms)
+  50%     16
+  66%     16
+  75%     16
+  80%     16
+  90%     19
+  95%     19
+  98%     19
+  99%     19
+ 100%     19 (longest request)
+```
+
+我们看到所有请求都是成功的。
+
+提高并发度，将并发数改为 20 次，请求次数更改为 20 次：
+
+```bash
+ab -c 20 -n 20  http://localhost:8090/customer/menu
+```
+
+返回结果：
+
+```text
+➜  ~ ab -c 20 -n 20  http://localhost:8090/customer/menu
+This is ApacheBench, Version 2.3 <$Revision: 1843412 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:
+Server Hostname:        localhost
+Server Port:            8090
+
+Document Path:          /customer/menu
+Document Length:        642 bytes
+
+Concurrency Level:      20
+Time taken for tests:   0.032 seconds
+Complete requests:      20
+Failed requests:        10
+   (Connect: 0, Receive: 0, Length: 10, Exceptions: 0)
+Total transferred:      8820 bytes
+HTML transferred:       6440 bytes
+Requests per second:    622.88 [#/sec] (mean)
+Time per request:       32.109 [ms] (mean)
+Time per request:       1.605 [ms] (mean, across all concurrent requests)
+Transfer rate:          268.25 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   0.3      1       1
+Processing:     9   19   3.0     19      22
+Waiting:        8   18   3.1     19      22
+Total:          9   19   3.1     20      23
+
+Percentage of the requests served within a certain time (ms)
+  50%     20
+  66%     20
+  75%     21
+  80%     21
+  90%     23
+  95%     23
+  98%     23
+  99%     23
+ 100%     23 (longest request)
+```
+
+此时，我们看到有 10 个请求失败了，因为我们在配置文件中，配置了：
+
+```properties
+resilience4j.bulkhead.backends.menu.max-concurrent-call=5
+resilience4j.bulkhead.backends.menu.max-wait-time=5
+```
+
+最大的线程访问数量以及访问超时时间，如果超过这些限制，bulkhead 就会对服务做限流。
+
