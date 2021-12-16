@@ -853,5 +853,24 @@ resilience4j.bulkhead.backends.menu.max-concurrent-call=5
 resilience4j.bulkhead.backends.menu.max-wait-time=5
 ```
 
-最大的线程访问数量以及访问超时时间，如果超过这些限制，bulkhead 就会对服务做限流。
+最大的线程访问数量以及访问超时时间，如果超过这些限制，bulkhead 就会对服务做限流保护。
+
+#### 4.2 RateLimiter
+
+**目的**
+
+- 限制特定时间段内的执行次数
+
+**用法**
+
+- RateLimiterRegistry / RateLimiterConfig
+- `@RateLimiter(name = "名称")`
+
+**配置**
+
+- RateLimiterProperties
+  - resilience4j.ratelimiter.limiters.名称
+    - limit-for-period
+    - limit-refresh-period-in-millis
+    - timeout-in-millis
 
